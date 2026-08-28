@@ -1,0 +1,61 @@
+{
+ "spec": {
+  "dataset": "ulb",
+  "protocol": "temporal",
+  "order_key": "Time",
+  "target": "Class",
+  "part_names": [
+   "train",
+   "val",
+   "holdout"
+  ],
+  "fractions": [
+   0.7,
+   0.15,
+   0.15
+  ],
+  "gap_seconds": 0.0,
+  "seed": null,
+  "test_size": null,
+  "note": "cut at order-key values; rows at a cut belong to the earlier part; evaluation parts keep natural prevalence"
+ },
+ "boundaries": {
+  "train": 132906.0,
+  "val": 151320.0,
+  "holdout": Infinity
+ },
+ "summary": {
+  "train": {
+   "rows": 198609,
+   "fraction": 0.7,
+   "positives": 366,
+   "prevalence": 0.001843,
+   "share_of_positives": 0.7738,
+   "order_min": 0.0,
+   "order_max": 132906.0
+  },
+  "val": {
+   "rows": 42560,
+   "fraction": 0.15,
+   "positives": 55,
+   "prevalence": 0.001292,
+   "share_of_positives": 0.1163,
+   "order_min": 132907.0,
+   "order_max": 151320.0
+  },
+  "holdout": {
+   "rows": 42557,
+   "fraction": 0.15,
+   "positives": 52,
+   "prevalence": 0.001222,
+   "share_of_positives": 0.1099,
+   "order_min": 151321.0,
+   "order_max": 172792.0
+  }
+ },
+ "sizes": {
+  "train": 198609,
+  "val": 42560,
+  "holdout": 42557
+ }
+}

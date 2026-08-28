@@ -1,0 +1,70 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "dataset": "ulb",
+ "protocol": "temporal",
+ "contract_version": "1A.4",
+ "history_spec": null,
+ "serving_contract": {
+  "dataset": "ulb",
+  "protocol": "temporal",
+  "contract_version": "1A.4",
+  "order_key": "Time",
+  "entity_key": null,
+  "row_id": null,
+  "event_time": null,
+  "stateful": false,
+  "required_fields": [
+   "Time",
+   "V1",
+   "V2",
+   "V3",
+   "V4",
+   "V5",
+   "V6",
+   "V7",
+   "V8",
+   "V9",
+   "V10",
+   "V11",
+   "V12",
+   "V13",
+   "V14",
+   "V15",
+   "V16",
+   "V17",
+   "V18",
+   "V19",
+   "V20",
+   "V21",
+   "V22",
+   "V23",
+   "V24",
+   "V25",
+   "V26",
+   "V27",
+   "V28",
+   "Amount"
+  ],
+  "outputs": {
+   "feature_layer": 32,
+   "tree": 32,
+   "linear": 32
+  },
+  "state_retention_seconds": null,
+  "rules": [
+   "point_in_time: features of an event use only events observed before it; labels never enter",
+   "ordering: events of one entity must arrive in non-decreasing order-key order (global chronological order recommended); an earlier event is rejected (OutOfOrderEvent) unless strict_order is disabled",
+   "idempotency: resubmitting an entity's last processed row id is rejected (DuplicateEvent); callers must not re-score an event to obtain different features",
+   "update_after_score: the event is recorded after its features are computed, regardless of any label",
+   "warm_up: before online scoring, replay (or restore a snapshot of) at least state_retention_seconds of prior events per entity; the offline snapshot after the training part is shipped as history-state.json",
+   "cold_start: an unseen entity gets counts 0 and NaN for the other history features; unseen categories map to <UNK>, missing to <NA>; NaN is kept in the tree view and train-median-imputed in the linear view",
+   "determinism: the same event sequence yields the same features; offline batch == online stream (tested)",
+   "isolation: no fitted state is shared between datasets; every artifact carries the dataset name and the frozen-contract hash"
+  ]
+ },
+ "files": {
+  "features.json": "d94d57ee7fd8a134f4716253ea82cf66efa2e570bb127a40e4ac3eec94fdcf95",
+  "view-linear.json": "a6966672056027ce3627992f2dcf33b72e355cd96a8932f14eb18754b6e72e41",
+  "view-tree.json": "e54864c50fc65477184119c1e05e3826b0e0d1e435c5e2b3d448f925d568298b"
+ }
+}

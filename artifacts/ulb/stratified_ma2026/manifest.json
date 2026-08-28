@@ -1,0 +1,315 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "dataset": "ulb",
+ "protocol": "stratified_ma2026",
+ "contract_version": "1A.4",
+ "role_in_suite": "EXTREME-IMBALANCE BENCHMARK: PCA schema supports only amount + opaque inputs; used for leakage-safe preprocessing, imbalance handling, feature selection and later model evaluation (incl. the Ma-2026 reproducibility benchmark).",
+ "frozen_contracts_sha256": "ffdff910e9c693268a5286cedab988b0a2698f61ed78cfcbcca80222716b817b",
+ "generated": "2026-08-28T04:31:08",
+ "prepare_notes": {
+  "dedup": {
+   "key": [
+    "Time",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "Amount",
+    "Class"
+   ],
+   "removed_rows": 0,
+   "rows": 284807,
+   "note": "benchmark protocol keeps raw rows as in Ma et al. 2026"
+  },
+  "row_id": null
+ },
+ "target": "Class",
+ "label_mechanism": "investigator_and_delayed_reports",
+ "maturity_policy": "finalized",
+ "split": {
+  "spec": {
+   "dataset": "ulb",
+   "protocol": "stratified_ma2026",
+   "order_key": "Time",
+   "target": "Class",
+   "part_names": [
+    "train",
+    "test"
+   ],
+   "fractions": null,
+   "gap_seconds": 0.0,
+   "seed": 42,
+   "test_size": 0.3,
+   "note": "Ma et al. 2026 reproducibility benchmark: stratified, seed 42, raw rows; prevalence preserved by stratification; ignores chronology by design"
+  },
+  "boundaries": {},
+  "summary": {
+   "train": {
+    "rows": 199364,
+    "fraction": 0.7,
+    "positives": 344,
+    "prevalence": 0.001725,
+    "share_of_positives": 0.6992,
+    "order_min": 0.0,
+    "order_max": 172792.0
+   },
+   "test": {
+    "rows": 85443,
+    "fraction": 0.3,
+    "positives": 148,
+    "prevalence": 0.001732,
+    "share_of_positives": 0.3008,
+    "order_min": 1.0,
+    "order_max": 172786.0
+   }
+  },
+  "sizes": {
+   "train": 199364,
+   "test": 85443
+  }
+ },
+ "parts": {
+  "train": {
+   "rows": 199364,
+   "positives": 344,
+   "prevalence": 0.001725,
+   "features": 30,
+   "nan_cells_feature_layer": 0,
+   "tree_view_columns": 30,
+   "linear_view_columns": 30
+  },
+  "test": {
+   "rows": 85443,
+   "positives": 148,
+   "prevalence": 0.001732,
+   "features": 30,
+   "nan_cells_feature_layer": 0,
+   "tree_view_columns": 30,
+   "linear_view_columns": 30
+  }
+ },
+ "feature_columns": [
+  "Time",
+  "V1",
+  "V2",
+  "V3",
+  "V4",
+  "V5",
+  "V6",
+  "V7",
+  "V8",
+  "V9",
+  "V10",
+  "V11",
+  "V12",
+  "V13",
+  "V14",
+  "V15",
+  "V16",
+  "V17",
+  "V18",
+  "V19",
+  "V20",
+  "V21",
+  "V22",
+  "V23",
+  "V24",
+  "V25",
+  "V26",
+  "V27",
+  "V28",
+  "Amount"
+ ],
+ "n_features": 30,
+ "categorical_columns": [],
+ "n_history_features": 0,
+ "steps": [
+  "Standardize",
+  "FinalizeFeatures"
+ ],
+ "views": {
+  "tree": 30,
+  "linear": 30
+ },
+ "selection": {
+  "mode": "rf_gini_refit",
+  "k": 15,
+  "selected": [
+   "V17",
+   "V12",
+   "V14",
+   "V10",
+   "V16",
+   "V11",
+   "V18",
+   "V9",
+   "V4",
+   "V7",
+   "V26",
+   "V21",
+   "V3",
+   "V2",
+   "V1"
+  ],
+  "ranking_top": [
+   [
+    "V17",
+    0.17709116528705668
+   ],
+   [
+    "V12",
+    0.1326949030772421
+   ],
+   [
+    "V14",
+    0.12196820773965682
+   ],
+   [
+    "V10",
+    0.07795503775397591
+   ],
+   [
+    "V16",
+    0.07184825940455057
+   ],
+   [
+    "V11",
+    0.05386204075725756
+   ],
+   [
+    "V18",
+    0.03332204141117188
+   ],
+   [
+    "V9",
+    0.033246631307106665
+   ],
+   [
+    "V4",
+    0.03087995548629784
+   ],
+   [
+    "V7",
+    0.025843327430079333
+   ],
+   [
+    "V26",
+    0.02155858650893632
+   ],
+   [
+    "V21",
+    0.016959793605575025
+   ],
+   [
+    "V3",
+    0.01645107336270177
+   ],
+   [
+    "V2",
+    0.0162470168561543
+   ],
+   [
+    "V1",
+    0.01300976279902146
+   ]
+  ],
+  "overlap_with_ma2026_top15": [
+   "V10",
+   "V11",
+   "V12",
+   "V14",
+   "V16",
+   "V17",
+   "V18",
+   "V21",
+   "V26",
+   "V3",
+   "V4",
+   "V7",
+   "V9"
+  ],
+  "fitted_on": "train",
+  "note": "protocol reproduction with RE-FITTED selection (ranks 13-15 are seed/depth sensitive, importances ~0.01); not an exact published-feature reproduction",
+  "published_alternative": {
+   "mode": "ma2026_published",
+   "selected": [
+    "V17",
+    "V12",
+    "V14",
+    "V10",
+    "V16",
+    "V11",
+    "V9",
+    "V18",
+    "V7",
+    "V4",
+    "V26",
+    "V3",
+    "V21",
+    "V27",
+    "V20"
+   ],
+   "note": "exact published feature list (Ma et al. 2026, Table 3)"
+  }
+ },
+ "imbalance": {
+  "baseline": "none (natural distribution)",
+  "metadata": "experiment.json",
+  "natural_parts": {
+   "train": {
+    "part": "train",
+    "rows": 199364,
+    "positives": 344,
+    "prevalence": 0.0017254870488152324,
+    "natural": true
+   },
+   "test": {
+    "part": "test",
+    "rows": 85443,
+    "positives": 148,
+    "prevalence": 0.0017321489179921118,
+    "natural": true
+   }
+  }
+ },
+ "artifacts": [
+  "bundle.json",
+  "cost-context-test.csv",
+  "cost-context-train.csv",
+  "experiment.json",
+  "features.json",
+  "imbalance-class_weight.json",
+  "imbalance-example_weight.json",
+  "imbalance-smote_enn.json",
+  "manifest.json",
+  "membership.csv",
+  "selection.json",
+  "split.json",
+  "view-linear.json",
+  "view-tree.json"
+ ]
+}

@@ -1,0 +1,61 @@
+{
+ "spec": {
+  "dataset": "sparkov",
+  "protocol": "temporal",
+  "order_key": "unix_time",
+  "target": "is_fraud",
+  "part_names": [
+   "train",
+   "val",
+   "holdout"
+  ],
+  "fractions": [
+   0.7,
+   0.15,
+   0.15
+  ],
+  "gap_seconds": 0.0,
+  "seed": null,
+  "test_size": null,
+  "note": "cut at order-key values; rows at a cut belong to the earlier part; evaluation parts keep natural prevalence"
+ },
+ "boundaries": {
+  "train": 1356715104.0,
+  "val": 1365011684.0,
+  "holdout": Infinity
+ },
+ "summary": {
+  "train": {
+   "rows": 907672,
+   "fraction": 0.7,
+   "positives": 5121,
+   "prevalence": 0.005642,
+   "share_of_positives": 0.6823,
+   "order_min": 1325376018.0,
+   "order_max": 1356715104.0
+  },
+  "val": {
+   "rows": 194503,
+   "fraction": 0.15,
+   "positives": 1253,
+   "prevalence": 0.006442,
+   "share_of_positives": 0.1669,
+   "order_min": 1356715118.0,
+   "order_max": 1365011684.0
+  },
+  "holdout": {
+   "rows": 194500,
+   "fraction": 0.15,
+   "positives": 1132,
+   "prevalence": 0.00582,
+   "share_of_positives": 0.1508,
+   "order_min": 1365011717.0,
+   "order_max": 1371816817.0
+  }
+ },
+ "sizes": {
+  "train": 907672,
+  "val": 194503,
+  "holdout": 194500
+ }
+}

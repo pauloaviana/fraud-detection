@@ -1,0 +1,113 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "dataset": "ulb",
+ "protocol": "temporal",
+ "view": "tree",
+ "spec": {
+  "method": "random_under",
+  "class_weight": "balanced",
+  "ca": 1.0,
+  "amount_floor": 1.0,
+  "sampling_ratio": 1.0,
+  "k_neighbors": 5,
+  "enn_neighbors": 3,
+  "enn_classes": "majority",
+  "seed": 42
+ },
+ "training_part": {
+  "method": "random_under",
+  "params": {
+   "method": "random_under",
+   "class_weight": "balanced",
+   "ca": 1.0,
+   "amount_floor": 1.0,
+   "sampling_ratio": 1.0,
+   "k_neighbors": 5,
+   "enn_neighbors": 3,
+   "enn_classes": "majority",
+   "seed": 42
+  },
+  "fold_role": "train",
+  "before": {
+   "rows": 198609,
+   "positives": 366,
+   "prevalence": 0.001842816790779874
+  },
+  "after": {
+   "rows": 732,
+   "positives": 366,
+   "prevalence": 0.5
+  }
+ },
+ "inner_folds": {
+  "kind": "forward_chaining",
+  "folds": [
+   {
+    "fold": 0,
+    "train": {
+     "rows": 79445,
+     "positives": 193,
+     "prevalence": 0.00242935364088363
+    },
+    "train_after": {
+     "rows": 386,
+     "positives": 193,
+     "prevalence": 0.5
+    },
+    "val_untouched": {
+     "rows": 39722,
+     "positives": 47,
+     "prevalence": 0.0011832234026484063
+    }
+   },
+   {
+    "fold": 1,
+    "train": {
+     "rows": 119167,
+     "positives": 240,
+     "prevalence": 0.0020139803804744604
+    },
+    "train_after": {
+     "rows": 480,
+     "positives": 240,
+     "prevalence": 0.5
+    },
+    "val_untouched": {
+     "rows": 39720,
+     "positives": 98,
+     "prevalence": 0.0024672708962739176
+    }
+   },
+   {
+    "fold": 2,
+    "train": {
+     "rows": 158887,
+     "positives": 338,
+     "prevalence": 0.002127298016829571
+    },
+    "train_after": {
+     "rows": 676,
+     "positives": 338,
+     "prevalence": 0.5
+    },
+    "val_untouched": {
+     "rows": 39722,
+     "positives": 28,
+     "prevalence": 0.0007048990483862847
+    }
+   }
+  ]
+ },
+ "evaluation_parts_untouched": {
+  "val": {
+   "rows": 42560,
+   "positives": 55,
+   "prevalence": 0.0012922932330827067
+  },
+  "holdout": {
+   "rows": 42557,
+   "positives": 52,
+   "prevalence": 0.0012218906407876495
+  }
+ }
+}

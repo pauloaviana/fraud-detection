@@ -1,0 +1,94 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "dataset": "sparkov",
+ "protocol": "temporal",
+ "contract_version": "1A.4",
+ "history_spec": {
+  "entity": "cc_num",
+  "order": "unix_time",
+  "event_time": "trans_date_trans_time",
+  "amount": "amt",
+  "conds": [
+   "category",
+   "merchant"
+  ],
+  "lat": "lat",
+  "lon": "long",
+  "merch_lat": "merch_lat",
+  "merch_lon": "merch_long",
+  "windows_h": [
+   1,
+   3,
+   6,
+   12,
+   18,
+   24,
+   72,
+   168
+  ],
+  "deviation_window_h": 168,
+  "vm_windows_d": [
+   7,
+   30
+  ],
+  "vm_alpha": 0.9,
+  "vm_min_prior": 3,
+  "speed_min_gap_s": 60.0
+ },
+ "serving_contract": {
+  "dataset": "sparkov",
+  "protocol": "temporal",
+  "contract_version": "1A.4",
+  "order_key": "unix_time",
+  "entity_key": "cc_num",
+  "row_id": "trans_num",
+  "event_time": "trans_date_trans_time",
+  "stateful": true,
+  "required_fields": [
+   "Unnamed: 0",
+   "trans_date_trans_time",
+   "cc_num",
+   "merchant",
+   "category",
+   "amt",
+   "first",
+   "last",
+   "gender",
+   "street",
+   "city",
+   "state",
+   "zip",
+   "lat",
+   "long",
+   "city_pop",
+   "job",
+   "dob",
+   "trans_num",
+   "unix_time",
+   "merch_lat",
+   "merch_long"
+  ],
+  "outputs": {
+   "feature_layer": 91,
+   "tree": 91,
+   "linear": 850
+  },
+  "state_retention_seconds": 2592000.0,
+  "rules": [
+   "point_in_time: features of an event use only events observed before it; labels never enter",
+   "ordering: events of one entity must arrive in non-decreasing order-key order (global chronological order recommended); an earlier event is rejected (OutOfOrderEvent) unless strict_order is disabled",
+   "idempotency: resubmitting an entity's last processed row id is rejected (DuplicateEvent); callers must not re-score an event to obtain different features",
+   "update_after_score: the event is recorded after its features are computed, regardless of any label",
+   "warm_up: before online scoring, replay (or restore a snapshot of) at least state_retention_seconds of prior events per entity; the offline snapshot after the training part is shipped as history-state.json",
+   "cold_start: an unseen entity gets counts 0 and NaN for the other history features; unseen categories map to <UNK>, missing to <NA>; NaN is kept in the tree view and train-median-imputed in the linear view",
+   "determinism: the same event sequence yields the same features; offline batch == online stream (tested)",
+   "isolation: no fitted state is shared between datasets; every artifact carries the dataset name and the frozen-contract hash"
+  ]
+ },
+ "files": {
+  "features.json": "b9ca9633ed60521bdaf12da85bb65b9a54dde5ccca9e287b74b6b9c7fac36cb7",
+  "history-state.json": "01cb5cacf5bbeb69ed2d17f033cb74999191b8364421a9b2ff0b238591df700d",
+  "view-linear.json": "aedc539f65a9e76368f47bf0dc8a46f5d59b492cda2070a5c01c9dff22d813f8",
+  "view-tree.json": "a9dda35140be6913d7027dd8249e9613a1f52a2804f85c5a8706568abf00c195"
+ }
+}

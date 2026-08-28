@@ -1,0 +1,78 @@
+{
+ "dataset": "sparkov",
+ "protocol": "temporal",
+ "view": "tree",
+ "imbalance": {
+  "method": "none",
+  "class_weight": "balanced",
+  "ca": 1.0,
+  "amount_floor": 1.0,
+  "sampling_ratio": 1.0,
+  "k_neighbors": 5,
+  "enn_neighbors": 3,
+  "enn_classes": "majority",
+  "enn_kind_sel": "all",
+  "seed": 42
+ },
+ "selection": "none",
+ "folds": {
+  "kind": "forward_chaining",
+  "n_folds": 3,
+  "seed": null,
+  "folds": [
+   {
+    "train_rows": 363069,
+    "val_rows": 181534,
+    "val_positives": 735,
+    "val_prevalence": 0.004048828318662069
+   },
+   {
+    "train_rows": 544603,
+    "val_rows": 181535,
+    "val_positives": 1111,
+    "val_prevalence": 0.006120031949761754
+   },
+   {
+    "train_rows": 726138,
+    "val_rows": 181534,
+    "val_positives": 800,
+    "val_prevalence": 0.004406887965890687
+   }
+  ]
+ },
+ "cost_ca": 1.0,
+ "notes": [
+  "baseline = natural class distribution; evaluation parts are never balanced",
+  "weighting available: class_weight (balanced) / example_weight (Bahnsen cost matrix)",
+  "resampling (random_under, random_over, smote, enn, smote_enn) only as explicit alternatives, applied strictly inside training folds via imbalance.resample_training_fold; not assumed beneficial (Ma et al. 2026: no-resampling XGBoost best on ULB)",
+  "cost context per part in cost-context-<part>.csv (row id, order, raw amount, label)"
+ ],
+ "frauddet_version": "0.1.0a1",
+ "class_weight_balanced_on_train": {
+  "0": 0.5028369587978961,
+  "1": 88.62253466119898
+ },
+ "natural_parts": {
+  "train": {
+   "part": "train",
+   "rows": 907672,
+   "positives": 5121,
+   "prevalence": 0.0056419058867079735,
+   "natural": true
+  },
+  "val": {
+   "part": "val",
+   "rows": 194503,
+   "positives": 1253,
+   "prevalence": 0.0064420600196398,
+   "natural": true
+  },
+  "holdout": {
+   "part": "holdout",
+   "rows": 194500,
+   "positives": 1132,
+   "prevalence": 0.005820051413881748,
+   "natural": true
+  }
+ }
+}

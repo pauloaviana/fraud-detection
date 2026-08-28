@@ -1,0 +1,231 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "dataset": "ulb",
+ "protocol": "temporal",
+ "contract_version": "1A.4",
+ "role_in_suite": "EXTREME-IMBALANCE BENCHMARK: PCA schema supports only amount + opaque inputs; used for leakage-safe preprocessing, imbalance handling, feature selection and later model evaluation (incl. the Ma-2026 reproducibility benchmark).",
+ "frozen_contracts_sha256": "ffdff910e9c693268a5286cedab988b0a2698f61ed78cfcbcca80222716b817b",
+ "generated": "2026-08-28T04:29:46",
+ "prepare_notes": {
+  "dedup": {
+   "key": [
+    "Time",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "Amount",
+    "Class"
+   ],
+   "removed_rows": 1081,
+   "rows": 283726
+  },
+  "row_id": null
+ },
+ "target": "Class",
+ "label_mechanism": "investigator_and_delayed_reports",
+ "maturity_policy": "finalized",
+ "split": {
+  "spec": {
+   "dataset": "ulb",
+   "protocol": "temporal",
+   "order_key": "Time",
+   "target": "Class",
+   "part_names": [
+    "train",
+    "val",
+    "holdout"
+   ],
+   "fractions": [
+    0.7,
+    0.15,
+    0.15
+   ],
+   "gap_seconds": 0.0,
+   "seed": null,
+   "test_size": null,
+   "note": "cut at order-key values; rows at a cut belong to the earlier part; evaluation parts keep natural prevalence"
+  },
+  "boundaries": {
+   "train": 132906.0,
+   "val": 151320.0,
+   "holdout": Infinity
+  },
+  "summary": {
+   "train": {
+    "rows": 198609,
+    "fraction": 0.7,
+    "positives": 366,
+    "prevalence": 0.001843,
+    "share_of_positives": 0.7738,
+    "order_min": 0.0,
+    "order_max": 132906.0
+   },
+   "val": {
+    "rows": 42560,
+    "fraction": 0.15,
+    "positives": 55,
+    "prevalence": 0.001292,
+    "share_of_positives": 0.1163,
+    "order_min": 132907.0,
+    "order_max": 151320.0
+   },
+   "holdout": {
+    "rows": 42557,
+    "fraction": 0.15,
+    "positives": 52,
+    "prevalence": 0.001222,
+    "share_of_positives": 0.1099,
+    "order_min": 151321.0,
+    "order_max": 172792.0
+   }
+  },
+  "sizes": {
+   "train": 198609,
+   "val": 42560,
+   "holdout": 42557
+  }
+ },
+ "parts": {
+  "train": {
+   "rows": 198609,
+   "positives": 366,
+   "prevalence": 0.001843,
+   "features": 32,
+   "nan_cells_feature_layer": 0,
+   "tree_view_columns": 32,
+   "linear_view_columns": 32
+  },
+  "val": {
+   "rows": 42560,
+   "positives": 55,
+   "prevalence": 0.001292,
+   "features": 32,
+   "nan_cells_feature_layer": 0,
+   "tree_view_columns": 32,
+   "linear_view_columns": 32
+  },
+  "holdout": {
+   "rows": 42557,
+   "positives": 52,
+   "prevalence": 0.001222,
+   "features": 32,
+   "nan_cells_feature_layer": 0,
+   "tree_view_columns": 32,
+   "linear_view_columns": 32
+  }
+ },
+ "feature_columns": [
+  "V1",
+  "V2",
+  "V3",
+  "V4",
+  "V5",
+  "V6",
+  "V7",
+  "V8",
+  "V9",
+  "V10",
+  "V11",
+  "V12",
+  "V13",
+  "V14",
+  "V15",
+  "V16",
+  "V17",
+  "V18",
+  "V19",
+  "V20",
+  "V21",
+  "V22",
+  "V23",
+  "V24",
+  "V25",
+  "V26",
+  "V27",
+  "V28",
+  "Amount_log1p",
+  "clk_day_sin",
+  "clk_day_cos",
+  "clk_day_bin"
+ ],
+ "n_features": 32,
+ "categorical_columns": [],
+ "n_history_features": 0,
+ "steps": [
+  "LogAmount",
+  "CyclicClock",
+  "Standardize",
+  "FinalizeFeatures"
+ ],
+ "views": {
+  "tree": 32,
+  "linear": 32
+ },
+ "selection": null,
+ "imbalance": {
+  "baseline": "none (natural distribution)",
+  "metadata": "experiment.json",
+  "natural_parts": {
+   "train": {
+    "part": "train",
+    "rows": 198609,
+    "positives": 366,
+    "prevalence": 0.001842816790779874,
+    "natural": true
+   },
+   "val": {
+    "part": "val",
+    "rows": 42560,
+    "positives": 55,
+    "prevalence": 0.0012922932330827067,
+    "natural": true
+   },
+   "holdout": {
+    "part": "holdout",
+    "rows": 42557,
+    "positives": 52,
+    "prevalence": 0.0012218906407876495,
+    "natural": true
+   }
+  }
+ },
+ "artifacts": [
+  "bundle.json",
+  "cost-context-holdout.csv",
+  "cost-context-train.csv",
+  "cost-context-val.csv",
+  "experiment.json",
+  "features.json",
+  "imbalance-random_under.json",
+  "manifest.json",
+  "membership.csv",
+  "split.json",
+  "view-linear.json",
+  "view-tree.json"
+ ]
+}

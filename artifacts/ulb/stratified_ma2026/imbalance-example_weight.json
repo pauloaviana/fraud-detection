@@ -1,0 +1,114 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "dataset": "ulb",
+ "protocol": "stratified_ma2026",
+ "view": "linear",
+ "spec": {
+  "method": "example_weight",
+  "class_weight": "balanced",
+  "ca": 1.0,
+  "amount_floor": 1.0,
+  "sampling_ratio": 1.0,
+  "k_neighbors": 5,
+  "enn_neighbors": 3,
+  "enn_classes": "majority",
+  "seed": 42
+ },
+ "training_part": {
+  "method": "example_weight",
+  "params": {
+   "method": "example_weight",
+   "class_weight": "balanced",
+   "ca": 1.0,
+   "amount_floor": 1.0,
+   "sampling_ratio": 1.0,
+   "k_neighbors": 5,
+   "enn_neighbors": 3,
+   "enn_classes": "majority",
+   "seed": 42
+  },
+  "fold_role": "train",
+  "before": {
+   "rows": 199364,
+   "positives": 344,
+   "prevalence": 0.0017254870488152324
+  },
+  "after": {
+   "rows": 199364,
+   "positives": 344,
+   "prevalence": 0.0017254870488152324
+  },
+  "note": "no rows changed (weighting is applied through sample weights)",
+  "weight_stats": {
+   "mean": 0.9999999999999994,
+   "pos_mean": 98.69089234827291,
+   "neg_mean": 0.8311442720942319
+  }
+ },
+ "inner_folds": {
+  "kind": "stratified_kfold",
+  "folds": [
+   {
+    "fold": 0,
+    "train": {
+     "rows": 132909,
+     "positives": 229,
+     "prevalence": 0.0017229833946534848
+    },
+    "train_after": {
+     "rows": 132909,
+     "positives": 229,
+     "prevalence": 0.0017229833946534848
+    },
+    "val_untouched": {
+     "rows": 66455,
+     "positives": 115,
+     "prevalence": 0.0017304943194642992
+    }
+   },
+   {
+    "fold": 1,
+    "train": {
+     "rows": 132909,
+     "positives": 229,
+     "prevalence": 0.0017229833946534848
+    },
+    "train_after": {
+     "rows": 132909,
+     "positives": 229,
+     "prevalence": 0.0017229833946534848
+    },
+    "val_untouched": {
+     "rows": 66455,
+     "positives": 115,
+     "prevalence": 0.0017304943194642992
+    }
+   },
+   {
+    "fold": 2,
+    "train": {
+     "rows": 132910,
+     "positives": 230,
+     "prevalence": 0.0017304943194642992
+    },
+    "train_after": {
+     "rows": 132910,
+     "positives": 230,
+     "prevalence": 0.0017304943194642992
+    },
+    "val_untouched": {
+     "rows": 66454,
+     "positives": 114,
+     "prevalence": 0.0017154723568182503
+    }
+   }
+  ]
+ },
+ "evaluation_parts_untouched": {
+  "test": {
+   "rows": 85443,
+   "positives": 148,
+   "prevalence": 0.0017321489179921118
+  }
+ }
+}

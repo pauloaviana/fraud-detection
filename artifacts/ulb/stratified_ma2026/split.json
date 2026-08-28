@@ -1,0 +1,42 @@
+{
+ "spec": {
+  "dataset": "ulb",
+  "protocol": "stratified_ma2026",
+  "order_key": "Time",
+  "target": "Class",
+  "part_names": [
+   "train",
+   "test"
+  ],
+  "fractions": null,
+  "gap_seconds": 0.0,
+  "seed": 42,
+  "test_size": 0.3,
+  "note": "Ma et al. 2026 reproducibility benchmark: stratified, seed 42, raw rows; prevalence preserved by stratification; ignores chronology by design"
+ },
+ "boundaries": {},
+ "summary": {
+  "train": {
+   "rows": 199364,
+   "fraction": 0.7,
+   "positives": 344,
+   "prevalence": 0.001725,
+   "share_of_positives": 0.6992,
+   "order_min": 0.0,
+   "order_max": 172792.0
+  },
+  "test": {
+   "rows": 85443,
+   "fraction": 0.3,
+   "positives": 148,
+   "prevalence": 0.001732,
+   "share_of_positives": 0.3008,
+   "order_min": 1.0,
+   "order_max": 172786.0
+  }
+ },
+ "sizes": {
+  "train": 199364,
+  "test": 85443
+ }
+}

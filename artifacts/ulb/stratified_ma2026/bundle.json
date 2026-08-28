@@ -1,0 +1,72 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "dataset": "ulb",
+ "protocol": "stratified_ma2026",
+ "contract_version": "1A.4",
+ "history_spec": null,
+ "serving_contract": {
+  "dataset": "ulb",
+  "protocol": "stratified_ma2026",
+  "contract_version": "1A.4",
+  "order_key": "Time",
+  "entity_key": null,
+  "row_id": null,
+  "event_time": null,
+  "stateful": false,
+  "required_fields": [
+   "Time",
+   "V1",
+   "V2",
+   "V3",
+   "V4",
+   "V5",
+   "V6",
+   "V7",
+   "V8",
+   "V9",
+   "V10",
+   "V11",
+   "V12",
+   "V13",
+   "V14",
+   "V15",
+   "V16",
+   "V17",
+   "V18",
+   "V19",
+   "V20",
+   "V21",
+   "V22",
+   "V23",
+   "V24",
+   "V25",
+   "V26",
+   "V27",
+   "V28",
+   "Amount"
+  ],
+  "outputs": {
+   "feature_layer": 30,
+   "tree": 30,
+   "linear": 30,
+   "selected": 15
+  },
+  "state_retention_seconds": null,
+  "rules": [
+   "point_in_time: features of an event use only events observed before it; labels never enter",
+   "ordering: events of one entity must arrive in non-decreasing order-key order (global chronological order recommended); an earlier event is rejected (OutOfOrderEvent) unless strict_order is disabled",
+   "idempotency: resubmitting an entity's last processed row id is rejected (DuplicateEvent); callers must not re-score an event to obtain different features",
+   "update_after_score: the event is recorded after its features are computed, regardless of any label",
+   "warm_up: before online scoring, replay (or restore a snapshot of) at least state_retention_seconds of prior events per entity; the offline snapshot after the training part is shipped as history-state.json",
+   "cold_start: an unseen entity gets counts 0 and NaN for the other history features; unseen categories map to <UNK>, missing to <NA>; NaN is kept in the tree view and train-median-imputed in the linear view",
+   "determinism: the same event sequence yields the same features; offline batch == online stream (tested)",
+   "isolation: no fitted state is shared between datasets; every artifact carries the dataset name and the frozen-contract hash"
+  ]
+ },
+ "files": {
+  "features.json": "f0ceb465c3a21a841bc3c6693fa0c9a3c0a8fdb955d3c01077d3a1b06e5e848d",
+  "selection.json": "d1ec35d415098d7f5d40b7ee2140efbe31028b2127a35301e6b9f128b6fb8411",
+  "view-linear.json": "9aa62845cb06d59d162573267a06e3a7964ad7d75574824d6cae4aff43813c4c",
+  "view-tree.json": "ff3dd69fc7cbc47fcaf2ca7c09e2c0feb608231eee1122338b962473d5728ed6"
+ }
+}

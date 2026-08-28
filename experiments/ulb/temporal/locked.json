@@ -1,0 +1,83 @@
+{
+ "champion": {
+  "model": "xgboost",
+  "treatment": "class_weight",
+  "params": {
+   "learning_rate": 0.05,
+   "max_depth": 6,
+   "min_child_weight": 5,
+   "subsample": 0.8,
+   "colsample_bytree": 0.6,
+   "reg_lambda": 5.0
+  },
+  "n_estimators": 132
+ },
+ "calibrator": "platt",
+ "selection_metric": "validation pr_auc",
+ "selection_value": 0.866554328742162,
+ "ranking": [
+  {
+   "model": "xgboost",
+   "treatment": "class_weight",
+   "pr_auc": 0.866554328742162,
+   "calibrator": "platt"
+  },
+  {
+   "model": "xgboost",
+   "treatment": "none",
+   "pr_auc": 0.8604076966729505,
+   "calibrator": "none"
+  },
+  {
+   "model": "lightgbm",
+   "treatment": "none",
+   "pr_auc": 0.8482976114563393,
+   "calibrator": "platt"
+  },
+  {
+   "model": "logreg",
+   "treatment": "smote_enn",
+   "pr_auc": 0.8442968091554798,
+   "calibrator": "isotonic"
+  },
+  {
+   "model": "lightgbm",
+   "treatment": "class_weight",
+   "pr_auc": 0.8404074759246767,
+   "calibrator": "platt"
+  },
+  {
+   "model": "lightgbm",
+   "treatment": "smote_enn",
+   "pr_auc": 0.838463127937366,
+   "calibrator": "platt"
+  },
+  {
+   "model": "xgboost",
+   "treatment": "smote_enn",
+   "pr_auc": 0.8180494753783147,
+   "calibrator": "platt"
+  },
+  {
+   "model": "logreg",
+   "treatment": "class_weight",
+   "pr_auc": 0.811620645781425,
+   "calibrator": "isotonic"
+  },
+  {
+   "model": "logreg",
+   "treatment": "none",
+   "pr_auc": 0.7734802460492722,
+   "calibrator": "platt"
+  }
+ ],
+ "thresholds": {
+  "f1_max": 0.08203169284865904,
+  "fpr_0.001": 0.020463644623515333,
+  "fpr_0.005": 0.006995408687408289,
+  "alert_0.005": 0.0071464614563901095,
+  "alert_0.01": 0.004203050442339559,
+  "cost_ca1": 0.005229875247842936
+ },
+ "locked_at": "2026-08-28T06:03:03"
+}

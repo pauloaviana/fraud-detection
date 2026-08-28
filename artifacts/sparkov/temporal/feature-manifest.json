@@ -1,0 +1,759 @@
+{
+ "generated": "2026-08-28T04:28:16",
+ "dataset": "sparkov",
+ "protocol": "temporal",
+ "contract_version": "1A.4",
+ "role_in_suite": "PIPELINE-ENGINEERING dataset: exercises the complete 1A feature pipeline (entity history, velocity, context, periodic time). NOT evidence of realistic fraud signal — labels and fraud patterns are generator artefacts.",
+ "frozen_contracts_sha256": "ffdff910e9c693268a5286cedab988b0a2698f61ed78cfcbcca80222716b817b",
+ "capabilities": {
+  "raw_transaction": "supported",
+  "entity_history": "supported",
+  "entity_history_grouped": "supported",
+  "periodic_time_entity": "supported",
+  "calendar_time": "partial",
+  "relative_time": "supported",
+  "cyclic_relative_time": "supported",
+  "geo_distance": "supported",
+  "demographics": "supported",
+  "merchant_context": "supported",
+  "card_meta": "unsupported",
+  "email_domain": "unsupported",
+  "device_identity": "unsupported",
+  "opaque_masked": "unsupported",
+  "cost_sensitive_eval": "supported"
+ },
+ "keys": {
+  "target": "is_fraud",
+  "row_id": "trans_num",
+  "entity_key": "cc_num",
+  "order_key": "unix_time",
+  "event_time": "trans_date_trans_time"
+ },
+ "label": {
+  "mechanism": "simulated",
+  "maturity_policy": "not_applicable_simulated"
+ },
+ "split": {
+  "train": {
+   "rows": 907672,
+   "fraction": 0.7,
+   "positives": 5121,
+   "prevalence": 0.005642,
+   "share_of_positives": 0.6823,
+   "order_min": 1325376018.0,
+   "order_max": 1356715104.0
+  },
+  "val": {
+   "rows": 194503,
+   "fraction": 0.15,
+   "positives": 1253,
+   "prevalence": 0.006442,
+   "share_of_positives": 0.1669,
+   "order_min": 1356715118.0,
+   "order_max": 1365011684.0
+  },
+  "holdout": {
+   "rows": 194500,
+   "fraction": 0.15,
+   "positives": 1132,
+   "prevalence": 0.00582,
+   "share_of_positives": 0.1508,
+   "order_min": 1365011717.0,
+   "order_max": 1371816817.0
+  }
+ },
+ "split_spec": {
+  "dataset": "sparkov",
+  "protocol": "temporal",
+  "order_key": "unix_time",
+  "target": "is_fraud",
+  "part_names": [
+   "train",
+   "val",
+   "holdout"
+  ],
+  "fractions": [
+   0.7,
+   0.15,
+   0.15
+  ],
+  "gap_seconds": 0.0,
+  "seed": null,
+  "test_size": null,
+  "note": "cut at order-key values; rows at a cut belong to the earlier part; evaluation parts keep natural prevalence"
+ },
+ "features": [
+  {
+   "name": "merchant",
+   "family": "raw/group_key",
+   "how": "merchant name",
+   "categorical": true
+  },
+  {
+   "name": "category",
+   "family": "raw/group_key",
+   "how": "merchant category (14 values)",
+   "categorical": true
+  },
+  {
+   "name": "amt",
+   "family": "raw/input",
+   "how": "transaction amount",
+   "categorical": false
+  },
+  {
+   "name": "gender",
+   "family": "raw/input",
+   "how": "customer gender (F/M)",
+   "categorical": true
+  },
+  {
+   "name": "state",
+   "family": "raw/group_key",
+   "how": "customer home state",
+   "categorical": true
+  },
+  {
+   "name": "lat",
+   "family": "raw/input",
+   "how": "customer home latitude",
+   "categorical": false
+  },
+  {
+   "name": "long",
+   "family": "raw/input",
+   "how": "customer home longitude",
+   "categorical": false
+  },
+  {
+   "name": "city_pop",
+   "family": "raw/input",
+   "how": "population of the customer's city",
+   "categorical": false
+  },
+  {
+   "name": "merch_lat",
+   "family": "raw/input",
+   "how": "merchant latitude (drawn per transaction)",
+   "categorical": false
+  },
+  {
+   "name": "merch_long",
+   "family": "raw/input",
+   "how": "merchant longitude (drawn per transaction)",
+   "categorical": false
+  },
+  {
+   "name": "h_n_prior",
+   "family": "history",
+   "how": "number of prior events of the entity",
+   "categorical": false
+  },
+  {
+   "name": "h_cnt_1h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_1h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_cnt_3h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_3h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_cnt_6h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_6h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_cnt_12h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_12h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_cnt_18h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_18h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_cnt_24h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_24h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_cnt_72h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_72h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_cnt_168h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_168h",
+   "family": "history/agg1",
+   "how": "prior events of the entity, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_cnt_1h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_amt_1h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_cnt_3h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_amt_3h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_cnt_6h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_amt_6h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_cnt_12h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_amt_12h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_cnt_18h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_amt_18h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_cnt_24h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_amt_24h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_cnt_72h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_amt_72h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_cnt_168h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_category_amt_168h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_cnt_1h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_amt_1h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_cnt_3h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_amt_3h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_cnt_6h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_amt_6h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_cnt_12h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_amt_12h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_cnt_18h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_amt_18h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_cnt_24h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_amt_24h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_cnt_72h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_amt_72h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_cnt_168h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_merchant_amt_168h",
+   "family": "history/agg2",
+   "how": "prior events of the entity with the same context, window",
+   "categorical": false
+  },
+  {
+   "name": "h_hours_since_last",
+   "family": "history/last",
+   "how": "hours since the entity's previous event",
+   "categorical": false
+  },
+  {
+   "name": "h_prev_amt",
+   "family": "history/deviation",
+   "how": "amount vs the entity's prior behaviour",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_ratio_prev",
+   "family": "history/deviation",
+   "how": "amount vs the entity's prior behaviour",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_over_mean_168h",
+   "family": "history/deviation",
+   "how": "amount vs the entity's prior behaviour",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_z_168h",
+   "family": "history/deviation",
+   "how": "amount vs the entity's prior behaviour",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_over_category_mean_168h",
+   "family": "history/deviation",
+   "how": "amount vs the entity's prior behaviour",
+   "categorical": false
+  },
+  {
+   "name": "h_amt_over_merchant_mean_168h",
+   "family": "history/deviation",
+   "how": "amount vs the entity's prior behaviour",
+   "categorical": false
+  },
+  {
+   "name": "h_dist_prev_km",
+   "family": "history/geo",
+   "how": "geographic behaviour vs prior events",
+   "categorical": false
+  },
+  {
+   "name": "h_speed_kmh",
+   "family": "history/geo",
+   "how": "geographic behaviour vs prior events",
+   "categorical": false
+  },
+  {
+   "name": "h_dist_home_mean_168h",
+   "family": "history/geo",
+   "how": "geographic behaviour vs prior events",
+   "categorical": false
+  },
+  {
+   "name": "h_dist_home_ratio_168h",
+   "family": "history/geo",
+   "how": "geographic behaviour vs prior events",
+   "categorical": false
+  },
+  {
+   "name": "vm7_n",
+   "family": "history/periodic",
+   "how": "von Mises time-of-day features over prior events",
+   "categorical": false
+  },
+  {
+   "name": "vm7_R",
+   "family": "history/periodic",
+   "how": "von Mises time-of-day features over prior events",
+   "categorical": false
+  },
+  {
+   "name": "vm7_dist_h",
+   "family": "history/periodic",
+   "how": "von Mises time-of-day features over prior events",
+   "categorical": false
+  },
+  {
+   "name": "vm7_in_ci90",
+   "family": "history/periodic",
+   "how": "von Mises time-of-day features over prior events",
+   "categorical": false
+  },
+  {
+   "name": "vm30_n",
+   "family": "history/periodic",
+   "how": "von Mises time-of-day features over prior events",
+   "categorical": false
+  },
+  {
+   "name": "vm30_R",
+   "family": "history/periodic",
+   "how": "von Mises time-of-day features over prior events",
+   "categorical": false
+  },
+  {
+   "name": "vm30_dist_h",
+   "family": "history/periodic",
+   "how": "von Mises time-of-day features over prior events",
+   "categorical": false
+  },
+  {
+   "name": "vm30_in_ci90",
+   "family": "history/periodic",
+   "how": "von Mises time-of-day features over prior events",
+   "categorical": false
+  },
+  {
+   "name": "cal_hour",
+   "family": "derived/calendar",
+   "how": "CalendarFeatures on the event datetime (dataset clock)",
+   "categorical": false
+  },
+  {
+   "name": "cal_dow",
+   "family": "derived/calendar",
+   "how": "CalendarFeatures on the event datetime (dataset clock)",
+   "categorical": false
+  },
+  {
+   "name": "cal_month",
+   "family": "derived/calendar",
+   "how": "CalendarFeatures on the event datetime (dataset clock)",
+   "categorical": false
+  },
+  {
+   "name": "cal_day_sin",
+   "family": "derived/calendar",
+   "how": "CalendarFeatures on the event datetime (dataset clock)",
+   "categorical": false
+  },
+  {
+   "name": "cal_day_cos",
+   "family": "derived/calendar",
+   "how": "CalendarFeatures on the event datetime (dataset clock)",
+   "categorical": false
+  },
+  {
+   "name": "cal_dow_sin",
+   "family": "derived/calendar",
+   "how": "CalendarFeatures on the event datetime (dataset clock)",
+   "categorical": false
+  },
+  {
+   "name": "cal_dow_cos",
+   "family": "derived/calendar",
+   "how": "CalendarFeatures on the event datetime (dataset clock)",
+   "categorical": false
+  },
+  {
+   "name": "age_years",
+   "family": "derived/demographics",
+   "how": "AgeAtEvent (dob at event time)",
+   "categorical": false
+  },
+  {
+   "name": "dist_km",
+   "family": "derived/geo",
+   "how": "HaversineDistance home→merchant",
+   "categorical": false
+  },
+  {
+   "name": "amt_log1p",
+   "family": "derived/amount",
+   "how": "LogAmount",
+   "categorical": false
+  },
+  {
+   "name": "merchant_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "category_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "state_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  }
+ ],
+ "n_features": 91,
+ "families": {
+  "raw/group_key": 3,
+  "raw/input": 7,
+  "history": 1,
+  "history/agg1": 16,
+  "history/agg2": 32,
+  "history/last": 1,
+  "history/deviation": 6,
+  "history/geo": 4,
+  "history/periodic": 8,
+  "derived/calendar": 7,
+  "derived/demographics": 1,
+  "derived/geo": 1,
+  "derived/amount": 1,
+  "derived/frequency": 3
+ },
+ "categorical_columns": [
+  "merchant",
+  "category",
+  "gender",
+  "state"
+ ],
+ "nan_policy": "NaN preserved in the feature layer and the tree view; train-median imputed in the linear view",
+ "views": {
+  "tree": 91,
+  "linear": 850
+ },
+ "selection": null,
+ "imbalance": {
+  "baseline": "none (natural distribution)",
+  "experiment": {
+   "method": "none",
+   "class_weight": "balanced",
+   "ca": 1.0,
+   "amount_floor": 1.0,
+   "sampling_ratio": 1.0,
+   "k_neighbors": 5,
+   "enn_neighbors": 3,
+   "enn_classes": "majority",
+   "enn_kind_sel": "all",
+   "seed": 42
+  },
+  "natural_parts": {
+   "train": {
+    "part": "train",
+    "rows": 907672,
+    "positives": 5121,
+    "prevalence": 0.0056419058867079735,
+    "natural": true
+   },
+   "val": {
+    "part": "val",
+    "rows": 194503,
+    "positives": 1253,
+    "prevalence": 0.0064420600196398,
+    "natural": true
+   },
+   "holdout": {
+    "part": "holdout",
+    "rows": 194500,
+    "positives": 1132,
+    "prevalence": 0.005820051413881748,
+    "natural": true
+   }
+  }
+ },
+ "serving_contract": {
+  "dataset": "sparkov",
+  "protocol": "temporal",
+  "contract_version": "1A.4",
+  "order_key": "unix_time",
+  "entity_key": "cc_num",
+  "row_id": "trans_num",
+  "event_time": "trans_date_trans_time",
+  "stateful": true,
+  "required_fields": [
+   "Unnamed: 0",
+   "trans_date_trans_time",
+   "cc_num",
+   "merchant",
+   "category",
+   "amt",
+   "first",
+   "last",
+   "gender",
+   "street",
+   "city",
+   "state",
+   "zip",
+   "lat",
+   "long",
+   "city_pop",
+   "job",
+   "dob",
+   "trans_num",
+   "unix_time",
+   "merch_lat",
+   "merch_long"
+  ],
+  "outputs": {
+   "feature_layer": 91,
+   "tree": 91,
+   "linear": 850
+  },
+  "state_retention_seconds": 2592000.0,
+  "rules": [
+   "point_in_time: features of an event use only events observed before it; labels never enter",
+   "ordering: events of one entity must arrive in non-decreasing order-key order (global chronological order recommended); an earlier event is rejected (OutOfOrderEvent) unless strict_order is disabled",
+   "idempotency: resubmitting an entity's last processed row id is rejected (DuplicateEvent); callers must not re-score an event to obtain different features",
+   "update_after_score: the event is recorded after its features are computed, regardless of any label",
+   "warm_up: before online scoring, replay (or restore a snapshot of) at least state_retention_seconds of prior events per entity; the offline snapshot after the training part is shipped as history-state.json",
+   "cold_start: an unseen entity gets counts 0 and NaN for the other history features; unseen categories map to <UNK>, missing to <NA>; NaN is kept in the tree view and train-median-imputed in the linear view",
+   "determinism: the same event sequence yields the same features; offline batch == online stream (tested)",
+   "isolation: no fitted state is shared between datasets; every artifact carries the dataset name and the frozen-contract hash"
+  ]
+ },
+ "artifacts": {
+  "experiment.json": "8152b8b8eb97a876cf77708eaf2ec9cc1037a683e0cfce6c5473f1b9fff0bb80",
+  "features.json": "b9ca9633ed60521bdaf12da85bb65b9a54dde5ccca9e287b74b6b9c7fac36cb7",
+  "history-state.json": "01cb5cacf5bbeb69ed2d17f033cb74999191b8364421a9b2ff0b238591df700d",
+  "manifest.json": "6482940a09166b73979a65f0eb1e68ac3744dac3350632847a552f75e636e230",
+  "split.json": "af8591e01e680fc449ac3fe25e35a753a2115984edae94650714dd84f46ba63b",
+  "view-linear.json": "aedc539f65a9e76368f47bf0dc8a46f5d59b492cda2070a5c01c9dff22d813f8",
+  "view-tree.json": "a9dda35140be6913d7027dd8249e9613a1f52a2804f85c5a8706568abf00c195"
+ }
+}

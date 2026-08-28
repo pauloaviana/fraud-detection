@@ -1,0 +1,47 @@
+{
+ "champion": {
+  "model": "lightgbm",
+  "treatment": "class_weight",
+  "params": {
+   "learning_rate": 0.06,
+   "num_leaves": 63,
+   "min_child_samples": 20,
+   "feature_fraction": 0.6,
+   "bagging_fraction": 0.8,
+   "lambda_l2": 0.0
+  },
+  "n_estimators": 320
+ },
+ "calibrator": "none",
+ "selection_metric": "validation pr_auc",
+ "selection_value": 0.9864128753272431,
+ "ranking": [
+  {
+   "model": "lightgbm",
+   "treatment": "class_weight",
+   "pr_auc": 0.9864128753272431,
+   "calibrator": "none"
+  },
+  {
+   "model": "lightgbm",
+   "treatment": "none",
+   "pr_auc": 0.9835617291025729,
+   "calibrator": "isotonic"
+  },
+  {
+   "model": "lightgbm",
+   "treatment": "random_under",
+   "pr_auc": 0.9685049172326826,
+   "calibrator": "platt"
+  }
+ ],
+ "thresholds": {
+  "f1_max": 0.6917983983575676,
+  "fpr_0.001": 0.04327678846351709,
+  "fpr_0.005": 0.0014923707248036082,
+  "alert_0.005": 0.18002407895345182,
+  "alert_0.01": 0.001231941086406748,
+  "cost_ca1": 0.0015036929609917053
+ },
+ "locked_at": "2026-08-28T13:57:08"
+}

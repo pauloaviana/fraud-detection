@@ -1,0 +1,110 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "dataset": "ulb",
+ "protocol": "stratified_ma2026",
+ "view": "linear",
+ "spec": {
+  "method": "smote_enn",
+  "class_weight": "balanced",
+  "ca": 1.0,
+  "amount_floor": 1.0,
+  "sampling_ratio": 1.0,
+  "k_neighbors": 5,
+  "enn_neighbors": 3,
+  "enn_classes": "majority",
+  "seed": 42
+ },
+ "training_part": {
+  "method": "smote_enn",
+  "params": {
+   "method": "smote_enn",
+   "class_weight": "balanced",
+   "ca": 1.0,
+   "amount_floor": 1.0,
+   "sampling_ratio": 1.0,
+   "k_neighbors": 5,
+   "enn_neighbors": 3,
+   "enn_classes": "majority",
+   "seed": 42
+  },
+  "fold_role": "train",
+  "before": {
+   "rows": 199364,
+   "positives": 344,
+   "prevalence": 0.0017254870488152324
+  },
+  "synthetic_added": 198676,
+  "removed_by_enn": 234,
+  "after": {
+   "rows": 397806,
+   "positives": 199020,
+   "prevalence": 0.5002941132109622
+  }
+ },
+ "inner_folds": {
+  "kind": "stratified_kfold",
+  "folds": [
+   {
+    "fold": 0,
+    "train": {
+     "rows": 132909,
+     "positives": 229,
+     "prevalence": 0.0017229833946534848
+    },
+    "train_after": {
+     "rows": 265202,
+     "positives": 132680,
+     "prevalence": 0.5002978861396219
+    },
+    "val_untouched": {
+     "rows": 66455,
+     "positives": 115,
+     "prevalence": 0.0017304943194642992
+    }
+   },
+   {
+    "fold": 1,
+    "train": {
+     "rows": 132909,
+     "positives": 229,
+     "prevalence": 0.0017229833946534848
+    },
+    "train_after": {
+     "rows": 265189,
+     "positives": 132680,
+     "prevalence": 0.5003224115630739
+    },
+    "val_untouched": {
+     "rows": 66455,
+     "positives": 115,
+     "prevalence": 0.0017304943194642992
+    }
+   },
+   {
+    "fold": 2,
+    "train": {
+     "rows": 132910,
+     "positives": 230,
+     "prevalence": 0.0017304943194642992
+    },
+    "train_after": {
+     "rows": 265196,
+     "positives": 132680,
+     "prevalence": 0.5003092052670478
+    },
+    "val_untouched": {
+     "rows": 66454,
+     "positives": 114,
+     "prevalence": 0.0017154723568182503
+    }
+   }
+  ]
+ },
+ "evaluation_parts_untouched": {
+  "test": {
+   "rows": 85443,
+   "positives": 148,
+   "prevalence": 0.0017321489179921118
+  }
+ }
+}

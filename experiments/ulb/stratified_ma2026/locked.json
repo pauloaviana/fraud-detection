@@ -1,0 +1,65 @@
+{
+ "champion": {
+  "model": "lightgbm",
+  "treatment": "none",
+  "params": {
+   "learning_rate": 0.03,
+   "num_leaves": 63,
+   "min_child_samples": 20,
+   "feature_fraction": 0.8,
+   "bagging_fraction": 0.8,
+   "lambda_l2": 5.0
+  },
+  "n_estimators": 208
+ },
+ "calibrator": "none",
+ "selection_metric": "cv mean pr_auc",
+ "selection_value": 0.855172408887617,
+ "ranking": [
+  {
+   "model": "lightgbm",
+   "treatment": "none",
+   "pr_auc": 0.855172408887617,
+   "calibrator": "none"
+  },
+  {
+   "model": "xgboost",
+   "treatment": "none",
+   "pr_auc": 0.8514876252609037,
+   "calibrator": "none"
+  },
+  {
+   "model": "xgboost",
+   "treatment": "smote_enn",
+   "pr_auc": 0.8201641983680835,
+   "calibrator": "none"
+  },
+  {
+   "model": "lightgbm",
+   "treatment": "smote_enn",
+   "pr_auc": 0.7933832531740389,
+   "calibrator": "none"
+  },
+  {
+   "model": "logreg",
+   "treatment": "smote_enn",
+   "pr_auc": 0.7696581520863638,
+   "calibrator": "none"
+  },
+  {
+   "model": "logreg",
+   "treatment": "none",
+   "pr_auc": 0.7664427294540088,
+   "calibrator": "none"
+  }
+ ],
+ "thresholds": {
+  "f1_max": 0.3385000107449311,
+  "fpr_0.001": 0.01694786926567122,
+  "fpr_0.005": 0.003703936296971349,
+  "alert_0.005": 0.0051132742255509695,
+  "alert_0.01": 0.0023427302039619943,
+  "cost_ca1": 0.002588357868802413
+ },
+ "locked_at": "2026-08-28T06:16:24"
+}

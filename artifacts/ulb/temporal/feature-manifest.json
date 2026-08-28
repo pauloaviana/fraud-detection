@@ -1,0 +1,397 @@
+{
+ "generated": "2026-08-28T04:29:46",
+ "dataset": "ulb",
+ "protocol": "temporal",
+ "contract_version": "1A.4",
+ "role_in_suite": "EXTREME-IMBALANCE BENCHMARK: PCA schema supports only amount + opaque inputs; used for leakage-safe preprocessing, imbalance handling, feature selection and later model evaluation (incl. the Ma-2026 reproducibility benchmark).",
+ "frozen_contracts_sha256": "ffdff910e9c693268a5286cedab988b0a2698f61ed78cfcbcca80222716b817b",
+ "capabilities": {
+  "raw_transaction": "partial",
+  "entity_history": "unsupported",
+  "entity_history_grouped": "unsupported",
+  "periodic_time_entity": "unsupported",
+  "calendar_time": "unsupported",
+  "relative_time": "supported",
+  "cyclic_relative_time": "partial",
+  "geo_distance": "unsupported",
+  "demographics": "unsupported",
+  "merchant_context": "unsupported",
+  "card_meta": "unsupported",
+  "email_domain": "unsupported",
+  "device_identity": "unsupported",
+  "opaque_masked": "supported",
+  "cost_sensitive_eval": "supported"
+ },
+ "keys": {
+  "target": "Class",
+  "row_id": null,
+  "entity_key": null,
+  "order_key": "Time",
+  "event_time": null
+ },
+ "label": {
+  "mechanism": "investigator_and_delayed_reports",
+  "maturity_policy": "finalized"
+ },
+ "split": {
+  "train": {
+   "rows": 198609,
+   "fraction": 0.7,
+   "positives": 366,
+   "prevalence": 0.001843,
+   "share_of_positives": 0.7738,
+   "order_min": 0.0,
+   "order_max": 132906.0
+  },
+  "val": {
+   "rows": 42560,
+   "fraction": 0.15,
+   "positives": 55,
+   "prevalence": 0.001292,
+   "share_of_positives": 0.1163,
+   "order_min": 132907.0,
+   "order_max": 151320.0
+  },
+  "holdout": {
+   "rows": 42557,
+   "fraction": 0.15,
+   "positives": 52,
+   "prevalence": 0.001222,
+   "share_of_positives": 0.1099,
+   "order_min": 151321.0,
+   "order_max": 172792.0
+  }
+ },
+ "split_spec": {
+  "dataset": "ulb",
+  "protocol": "temporal",
+  "order_key": "Time",
+  "target": "Class",
+  "part_names": [
+   "train",
+   "val",
+   "holdout"
+  ],
+  "fractions": [
+   0.7,
+   0.15,
+   0.15
+  ],
+  "gap_seconds": 0.0,
+  "seed": null,
+  "test_size": null,
+  "note": "cut at order-key values; rows at a cut belong to the earlier part; evaluation parts keep natural prevalence"
+ },
+ "features": [
+  {
+   "name": "V1",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V2",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V3",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V4",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V5",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V6",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V7",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V8",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V9",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V10",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V11",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V12",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V13",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V14",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V15",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V16",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V17",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V18",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V19",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V20",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V21",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V22",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V23",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V24",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V25",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V26",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V27",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "V28",
+   "family": "raw/opaque",
+   "how": "PCA components of undisclosed original features",
+   "categorical": false
+  },
+  {
+   "name": "Amount_log1p",
+   "family": "derived/amount",
+   "how": "LogAmount",
+   "categorical": false
+  },
+  {
+   "name": "clk_day_sin",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  },
+  {
+   "name": "clk_day_cos",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  },
+  {
+   "name": "clk_day_bin",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  }
+ ],
+ "n_features": 32,
+ "families": {
+  "raw/opaque": 28,
+  "derived/amount": 1,
+  "derived/cyclic": 3
+ },
+ "categorical_columns": [],
+ "nan_policy": "NaN preserved in the feature layer and the tree view; train-median imputed in the linear view",
+ "views": {
+  "tree": 32,
+  "linear": 32
+ },
+ "selection": null,
+ "imbalance": {
+  "baseline": "none (natural distribution)",
+  "experiment": {
+   "method": "none",
+   "class_weight": "balanced",
+   "ca": 1.0,
+   "amount_floor": 1.0,
+   "sampling_ratio": 1.0,
+   "k_neighbors": 5,
+   "enn_neighbors": 3,
+   "enn_classes": "majority",
+   "enn_kind_sel": "all",
+   "seed": 42
+  },
+  "natural_parts": {
+   "train": {
+    "part": "train",
+    "rows": 198609,
+    "positives": 366,
+    "prevalence": 0.001842816790779874,
+    "natural": true
+   },
+   "val": {
+    "part": "val",
+    "rows": 42560,
+    "positives": 55,
+    "prevalence": 0.0012922932330827067,
+    "natural": true
+   },
+   "holdout": {
+    "part": "holdout",
+    "rows": 42557,
+    "positives": 52,
+    "prevalence": 0.0012218906407876495,
+    "natural": true
+   }
+  }
+ },
+ "serving_contract": {
+  "dataset": "ulb",
+  "protocol": "temporal",
+  "contract_version": "1A.4",
+  "order_key": "Time",
+  "entity_key": null,
+  "row_id": null,
+  "event_time": null,
+  "stateful": false,
+  "required_fields": [
+   "Time",
+   "V1",
+   "V2",
+   "V3",
+   "V4",
+   "V5",
+   "V6",
+   "V7",
+   "V8",
+   "V9",
+   "V10",
+   "V11",
+   "V12",
+   "V13",
+   "V14",
+   "V15",
+   "V16",
+   "V17",
+   "V18",
+   "V19",
+   "V20",
+   "V21",
+   "V22",
+   "V23",
+   "V24",
+   "V25",
+   "V26",
+   "V27",
+   "V28",
+   "Amount"
+  ],
+  "outputs": {
+   "feature_layer": 32,
+   "tree": 32,
+   "linear": 32
+  },
+  "state_retention_seconds": null,
+  "rules": [
+   "point_in_time: features of an event use only events observed before it; labels never enter",
+   "ordering: events of one entity must arrive in non-decreasing order-key order (global chronological order recommended); an earlier event is rejected (OutOfOrderEvent) unless strict_order is disabled",
+   "idempotency: resubmitting an entity's last processed row id is rejected (DuplicateEvent); callers must not re-score an event to obtain different features",
+   "update_after_score: the event is recorded after its features are computed, regardless of any label",
+   "warm_up: before online scoring, replay (or restore a snapshot of) at least state_retention_seconds of prior events per entity; the offline snapshot after the training part is shipped as history-state.json",
+   "cold_start: an unseen entity gets counts 0 and NaN for the other history features; unseen categories map to <UNK>, missing to <NA>; NaN is kept in the tree view and train-median-imputed in the linear view",
+   "determinism: the same event sequence yields the same features; offline batch == online stream (tested)",
+   "isolation: no fitted state is shared between datasets; every artifact carries the dataset name and the frozen-contract hash"
+  ]
+ },
+ "artifacts": {
+  "experiment.json": "6699ead93f41b79ddc2f7aeb0c462833e4234ebbc9cb874b43a1e79ac58dc323",
+  "features.json": "d94d57ee7fd8a134f4716253ea82cf66efa2e570bb127a40e4ac3eec94fdcf95",
+  "imbalance-random_under.json": "603bac54aa22910dc927a198ad2c86b02815b5339c30e7f576745181befa45f5",
+  "manifest.json": "395123bec44465a0d3f2272b5a63625872ebf0bdf19366721cdfb1ca5edd6da0",
+  "split.json": "8ed9d256b8e71226e91fe9490a2cac9f3b77ac47c563e7a326ad2d45dc15eebe",
+  "view-linear.json": "a6966672056027ce3627992f2dcf33b72e355cd96a8932f14eb18754b6e72e41",
+  "view-tree.json": "e54864c50fc65477184119c1e05e3826b0e0d1e435c5e2b3d448f925d568298b"
+ }
+}

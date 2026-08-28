@@ -1,0 +1,5830 @@
+{
+ "generated": "2026-08-28T04:29:42",
+ "dataset": "ieee",
+ "protocol": "temporal",
+ "contract_version": "1A.4",
+ "role_in_suite": "PRODUCTION REALITY CHECK: real masked transactions; use every defensible 1A feature the masked schema and relative chronology support; no invented entity, time-of-day or device semantics.",
+ "frozen_contracts_sha256": "ffdff910e9c693268a5286cedab988b0a2698f61ed78cfcbcca80222716b817b",
+ "capabilities": {
+  "raw_transaction": "supported",
+  "entity_history": "unsupported",
+  "entity_history_grouped": "unsupported",
+  "periodic_time_entity": "unsupported",
+  "calendar_time": "unsupported",
+  "relative_time": "supported",
+  "cyclic_relative_time": "supported",
+  "geo_distance": "unsupported",
+  "demographics": "unsupported",
+  "merchant_context": "partial",
+  "card_meta": "supported",
+  "email_domain": "supported",
+  "device_identity": "partial",
+  "opaque_masked": "supported",
+  "cost_sensitive_eval": "supported"
+ },
+ "keys": {
+  "target": "isFraud",
+  "row_id": "TransactionID",
+  "entity_key": null,
+  "order_key": "TransactionDT",
+  "event_time": null
+ },
+ "label": {
+  "mechanism": "chargeback_reported",
+  "maturity_policy": "finalized"
+ },
+ "split": {
+  "train": {
+   "rows": 413378,
+   "fraction": 0.7,
+   "positives": 14538,
+   "prevalence": 0.035169,
+   "share_of_positives": 0.7036,
+   "order_min": 86400.0,
+   "order_max": 10437996.0
+  },
+  "val": {
+   "rows": 88581,
+   "fraction": 0.15,
+   "positives": 3042,
+   "prevalence": 0.034341,
+   "share_of_positives": 0.1472,
+   "order_min": 10438003.0,
+   "order_max": 13151840.0
+  },
+  "holdout": {
+   "rows": 88581,
+   "fraction": 0.15,
+   "positives": 3083,
+   "prevalence": 0.034804,
+   "share_of_positives": 0.1492,
+   "order_min": 13151880.0,
+   "order_max": 15811131.0
+  }
+ },
+ "split_spec": {
+  "dataset": "ieee",
+  "protocol": "temporal",
+  "order_key": "TransactionDT",
+  "target": "isFraud",
+  "part_names": [
+   "train",
+   "val",
+   "holdout"
+  ],
+  "fractions": [
+   0.7,
+   0.15,
+   0.15
+  ],
+  "gap_seconds": 0.0,
+  "seed": null,
+  "test_size": null,
+  "note": "cut at order-key values; rows at a cut belong to the earlier part; evaluation parts keep natural prevalence"
+ },
+ "features": [
+  {
+   "name": "TransactionAmt",
+   "family": "raw/input",
+   "how": "amount in USD",
+   "categorical": false
+  },
+  {
+   "name": "ProductCD",
+   "family": "raw/group_key",
+   "how": "product code (W,C,H,R,S); meaning masked",
+   "categorical": true
+  },
+  {
+   "name": "card1",
+   "family": "raw/opaque",
+   "how": "card code (13.5k values)",
+   "categorical": false
+  },
+  {
+   "name": "card2",
+   "family": "raw/opaque",
+   "how": "card code",
+   "categorical": false
+  },
+  {
+   "name": "card3",
+   "family": "raw/opaque",
+   "how": "card code (issuer country-like)",
+   "categorical": false
+  },
+  {
+   "name": "card4",
+   "family": "raw/input",
+   "how": "card network",
+   "categorical": true
+  },
+  {
+   "name": "card5",
+   "family": "raw/opaque",
+   "how": "card code",
+   "categorical": false
+  },
+  {
+   "name": "card6",
+   "family": "raw/input",
+   "how": "debit / credit",
+   "categorical": true
+  },
+  {
+   "name": "addr1",
+   "family": "raw/opaque",
+   "how": "masked billing region code",
+   "categorical": false
+  },
+  {
+   "name": "addr2",
+   "family": "raw/opaque",
+   "how": "masked billing country code",
+   "categorical": false
+  },
+  {
+   "name": "dist1",
+   "family": "raw/opaque",
+   "how": "distance between undisclosed endpoints",
+   "categorical": false
+  },
+  {
+   "name": "dist2",
+   "family": "raw/opaque",
+   "how": "distance between undisclosed endpoints",
+   "categorical": false
+  },
+  {
+   "name": "P_emaildomain",
+   "family": "raw/input",
+   "how": "purchaser email domain",
+   "categorical": true
+  },
+  {
+   "name": "R_emaildomain",
+   "family": "raw/input",
+   "how": "recipient email domain",
+   "categorical": true
+  },
+  {
+   "name": "C1",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C2",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C3",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C4",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C5",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C6",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C7",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C8",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C9",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C10",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C11",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C12",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C13",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "C14",
+   "family": "raw/opaque",
+   "how": "vendor counts (e.g. addresses associated with the card)",
+   "categorical": false
+  },
+  {
+   "name": "D1",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D2",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D3",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D4",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D5",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D6",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D7",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D8",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D9",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D10",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D11",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D12",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D13",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D14",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "D15",
+   "family": "raw/opaque",
+   "how": "vendor timedeltas in days (e.g. since previous transaction)",
+   "categorical": false
+  },
+  {
+   "name": "M1",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "M2",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "M3",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "M4",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "M5",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "M6",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "M7",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "M8",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "M9",
+   "family": "raw/opaque",
+   "how": "match flags T/F (M4: M0/M1/M2)",
+   "categorical": true
+  },
+  {
+   "name": "V1",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V2",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V3",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V4",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V5",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V6",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V7",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V8",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V9",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V10",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V11",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V12",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V13",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V14",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V15",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V16",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V17",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V18",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V19",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V20",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V21",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V22",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V23",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V24",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V25",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V26",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V27",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V28",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V29",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V30",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V31",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V32",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V33",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V34",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V35",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V36",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V37",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V38",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V39",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V40",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V41",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V42",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V43",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V44",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V45",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V46",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V47",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V48",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V49",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V50",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V51",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V52",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V53",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V54",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V55",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V56",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V57",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V58",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V59",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V60",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V61",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V62",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V63",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V64",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V65",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V66",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V67",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V68",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V69",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V70",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V71",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V72",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V73",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V74",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V75",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V76",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V77",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V78",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V79",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V80",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V81",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V82",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V83",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V84",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V85",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V86",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V87",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V88",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V89",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V90",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V91",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V92",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V93",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V94",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V95",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V96",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V97",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V98",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V99",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V100",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V101",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V102",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V103",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V104",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V105",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V106",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V107",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V108",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V109",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V110",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V111",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V112",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V113",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V114",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V115",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V116",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V117",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V118",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V119",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V120",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V121",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V122",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V123",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V124",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V125",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V126",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V127",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V128",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V129",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V130",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V131",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V132",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V133",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V134",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V135",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V136",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V137",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V138",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V139",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V140",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V141",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V142",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V143",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V144",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V145",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V146",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V147",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V148",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V149",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V150",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V151",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V152",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V153",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V154",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V155",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V156",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V157",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V158",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V159",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V160",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V161",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V162",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V163",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V164",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V165",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V166",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V167",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V168",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V169",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V170",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V171",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V172",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V173",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V174",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V175",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V176",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V177",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V178",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V179",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V180",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V181",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V182",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V183",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V184",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V185",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V186",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V187",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V188",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V189",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V190",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V191",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V192",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V193",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V194",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V195",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V196",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V197",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V198",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V199",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V200",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V201",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V202",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V203",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V204",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V205",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V206",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V207",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V208",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V209",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V210",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V211",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V212",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V213",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V214",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V215",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V216",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V217",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V218",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V219",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V220",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V221",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V222",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V223",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V224",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V225",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V226",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V227",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V228",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V229",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V230",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V231",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V232",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V233",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V234",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V235",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V236",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V237",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V238",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V239",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V240",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V241",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V242",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V243",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V244",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V245",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V246",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V247",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V248",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V249",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V250",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V251",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V252",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V253",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V254",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V255",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V256",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V257",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V258",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V259",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V260",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V261",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V262",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V263",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V264",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V265",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V266",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V267",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V268",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V269",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V270",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V271",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V272",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V273",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V274",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V275",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V276",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V277",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V278",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V279",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V280",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V281",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V282",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V283",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V284",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V285",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V286",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V287",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V288",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V289",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V290",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V291",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V292",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V293",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V294",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V295",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V296",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V297",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V298",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V299",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V300",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V301",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V302",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V303",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V304",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V305",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V306",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V307",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V308",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V309",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V310",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V311",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V312",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V313",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V314",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V315",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V316",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V317",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V318",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V319",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V320",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V321",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V322",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V323",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V324",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V325",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V326",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V327",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V328",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V329",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V330",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V331",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V332",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V333",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V334",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V335",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V336",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V337",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V338",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "V339",
+   "family": "raw/opaque",
+   "how": "Vesta engineered features (ranking, counting, entity relations)",
+   "categorical": false
+  },
+  {
+   "name": "id_01",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_02",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_03",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_04",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_05",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_06",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_07",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_08",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_09",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_10",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_11",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_12",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_13",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_14",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_15",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_16",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_17",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_18",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_19",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_20",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_21",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_22",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_23",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_24",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_25",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_26",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_27",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_28",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_29",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_30",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_31",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_32",
+   "family": "raw/opaque",
+   "how": "identity vendor numeric scores / codes",
+   "categorical": false
+  },
+  {
+   "name": "id_33",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_34",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_35",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_36",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_37",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "id_38",
+   "family": "raw/input",
+   "how": "identity categorical: OS (id_30), browser (id_31), resolution (id_33), flags",
+   "categorical": true
+  },
+  {
+   "name": "DeviceType",
+   "family": "raw/input",
+   "how": "desktop / mobile",
+   "categorical": true
+  },
+  {
+   "name": "DeviceInfo",
+   "family": "raw/input",
+   "how": "device string (high cardinality)",
+   "categorical": true
+  },
+  {
+   "name": "has_identity",
+   "family": "derived/join",
+   "how": "identity row present (prepare)",
+   "categorical": false
+  },
+  {
+   "name": "TransactionAmt_decimals",
+   "family": "derived/amount",
+   "how": "AmountDecimals",
+   "categorical": false
+  },
+  {
+   "name": "TransactionAmt_log1p",
+   "family": "derived/amount",
+   "how": "LogAmount",
+   "categorical": false
+  },
+  {
+   "name": "clk_day_sin",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  },
+  {
+   "name": "clk_day_cos",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  },
+  {
+   "name": "clk_day_bin",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  },
+  {
+   "name": "clk_week_sin",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  },
+  {
+   "name": "clk_week_cos",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  },
+  {
+   "name": "clk_week_bin",
+   "family": "derived/cyclic",
+   "how": "CyclicClock on the relative order key",
+   "categorical": false
+  },
+  {
+   "name": "P_email_provider",
+   "family": "derived/token",
+   "how": "TokenSplit family token",
+   "categorical": true
+  },
+  {
+   "name": "P_email_tld",
+   "family": "derived/token",
+   "how": "TokenSplit family token",
+   "categorical": true
+  },
+  {
+   "name": "R_email_provider",
+   "family": "derived/token",
+   "how": "TokenSplit family token",
+   "categorical": true
+  },
+  {
+   "name": "os_family",
+   "family": "derived/token",
+   "how": "TokenSplit family token",
+   "categorical": true
+  },
+  {
+   "name": "browser_family",
+   "family": "derived/token",
+   "how": "TokenSplit family token",
+   "categorical": true
+  },
+  {
+   "name": "device_family",
+   "family": "derived/token",
+   "how": "TokenSplit family token",
+   "categorical": true
+  },
+  {
+   "name": "n_missing_V",
+   "family": "derived/missing",
+   "how": "RowMissingCount",
+   "categorical": false
+  },
+  {
+   "name": "n_missing_D",
+   "family": "derived/missing",
+   "how": "RowMissingCount",
+   "categorical": false
+  },
+  {
+   "name": "n_missing_id",
+   "family": "derived/missing",
+   "how": "RowMissingCount",
+   "categorical": false
+  },
+  {
+   "name": "card2__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "card3__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "card4__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "card5__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "card6__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "addr1__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "addr2__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "dist1__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "dist2__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "P_emaildomain__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "R_emaildomain__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D1__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D2__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D3__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D4__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D5__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D6__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D7__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D8__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D9__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D10__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D11__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D12__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D13__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D14__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "D15__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M1__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M2__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M3__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M4__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M5__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M6__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M7__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M8__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "M9__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V1__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V2__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V3__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V4__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V5__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V6__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V7__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V8__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V9__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V10__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V11__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V12__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V13__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V14__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V15__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V16__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V17__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V18__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V19__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V20__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V21__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V22__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V23__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V24__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V25__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V26__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V27__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V28__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V29__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V30__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V31__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V32__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V33__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V34__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V35__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V36__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V37__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V38__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V39__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V40__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V41__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V42__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V43__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V44__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V45__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V46__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V47__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V48__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V49__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V50__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V51__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V52__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V53__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V54__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V55__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V56__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V57__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V58__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V59__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V60__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V61__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V62__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V63__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V64__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V65__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V66__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V67__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V68__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V69__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V70__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V71__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V72__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V73__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V74__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V75__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V76__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V77__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V78__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V79__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V80__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V81__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V82__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V83__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V84__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V85__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V86__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V87__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V88__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V89__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V90__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V91__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V92__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V93__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V94__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V138__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V139__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V140__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V141__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V142__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V143__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V144__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V145__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V146__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V147__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V148__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V149__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V150__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V151__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V152__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V153__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V154__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V155__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V156__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V157__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V158__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V159__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V160__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V161__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V162__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V163__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V164__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V165__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V166__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V167__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V168__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V169__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V170__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V171__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V172__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V173__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V174__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V175__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V176__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V177__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V178__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V179__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V180__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V181__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V182__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V183__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V184__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V185__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V186__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V187__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V188__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V189__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V190__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V191__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V192__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V193__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V194__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V195__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V196__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V197__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V198__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V199__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V200__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V201__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V202__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V203__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V204__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V205__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V206__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V207__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V208__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V209__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V210__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V211__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V212__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V213__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V214__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V215__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V216__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V217__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V218__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V219__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V220__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V221__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V222__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V223__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V224__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V225__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V226__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V227__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V228__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V229__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V230__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V231__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V232__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V233__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V234__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V235__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V236__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V237__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V238__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V239__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V240__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V241__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V242__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V243__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V244__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V245__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V246__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V247__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V248__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V249__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V250__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V251__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V252__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V253__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V254__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V255__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V256__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V257__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V258__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V259__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V260__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V261__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V262__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V263__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V264__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V265__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V266__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V267__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V268__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V269__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V270__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V271__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V272__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V273__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V274__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V275__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V276__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V277__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V278__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V279__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V280__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V281__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V282__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V283__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V284__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V285__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V286__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V287__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V288__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V289__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V290__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V291__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V292__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V293__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V294__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V295__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V296__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V297__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V298__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V299__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V300__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V301__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V302__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V303__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V304__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V305__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V306__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V307__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V308__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V309__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V310__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V311__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V312__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V313__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V314__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V315__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V316__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V317__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V318__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V319__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V320__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V321__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V322__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V323__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V324__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V325__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V326__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V327__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V328__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V329__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V330__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V331__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V332__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V333__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V334__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V335__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V336__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V337__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V338__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "V339__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_01__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_02__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_03__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_04__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_05__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_06__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_07__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_08__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_09__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_10__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_11__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_12__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_13__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_14__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_15__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_16__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_17__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_18__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_19__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_20__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_21__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_22__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_23__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_24__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_25__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_26__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_27__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_28__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_29__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_30__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_31__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_32__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_33__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_34__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_35__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_36__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_37__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "id_38__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "DeviceType__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "DeviceInfo__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "P_email_provider__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "P_email_tld__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "R_email_provider__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "os_family__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "browser_family__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "device_family__isna",
+   "family": "derived/missing",
+   "how": "MissingIndicator (columns with nulls in train)",
+   "categorical": false
+  },
+  {
+   "name": "ProductCD_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "card4_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "card6_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "P_emaildomain_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "R_emaildomain_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "DeviceType_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "DeviceInfo_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M1_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M2_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M3_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M4_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M5_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M6_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M7_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M8_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "M9_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_12_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_15_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_16_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_23_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_27_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_28_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_29_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_30_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_31_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_33_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_34_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_35_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_36_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_37_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "id_38_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "P_email_provider_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "P_email_tld_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "R_email_provider_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "os_family_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "browser_family_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  },
+  {
+   "name": "device_family_freq",
+   "family": "derived/frequency",
+   "how": "FrequencyEncoder (train frequencies)",
+   "categorical": false
+  }
+ ],
+ "n_features": 863,
+ "families": {
+  "raw/input": 22,
+  "raw/group_key": 1,
+  "raw/opaque": 408,
+  "derived/join": 1,
+  "derived/amount": 2,
+  "derived/cyclic": 6,
+  "derived/token": 6,
+  "derived/missing": 380,
+  "derived/frequency": 37
+ },
+ "categorical_columns": [
+  "ProductCD",
+  "card4",
+  "card6",
+  "P_emaildomain",
+  "R_emaildomain",
+  "M1",
+  "M2",
+  "M3",
+  "M4",
+  "M5",
+  "M6",
+  "M7",
+  "M8",
+  "M9",
+  "id_12",
+  "id_15",
+  "id_16",
+  "id_23",
+  "id_27",
+  "id_28",
+  "id_29",
+  "id_30",
+  "id_31",
+  "id_33",
+  "id_34",
+  "id_35",
+  "id_36",
+  "id_37",
+  "id_38",
+  "DeviceType",
+  "DeviceInfo",
+  "P_email_provider",
+  "P_email_tld",
+  "R_email_provider",
+  "os_family",
+  "browser_family",
+  "device_family"
+ ],
+ "nan_policy": "NaN preserved in the feature layer and the tree view; train-median imputed in the linear view",
+ "views": {
+  "tree": 863,
+  "linear": 1483
+ },
+ "selection": null,
+ "imbalance": {
+  "baseline": "none (natural distribution)",
+  "experiment": {
+   "method": "none",
+   "class_weight": "balanced",
+   "ca": 1.0,
+   "amount_floor": 1.0,
+   "sampling_ratio": 1.0,
+   "k_neighbors": 5,
+   "enn_neighbors": 3,
+   "enn_classes": "majority",
+   "enn_kind_sel": "all",
+   "seed": 42
+  },
+  "natural_parts": {
+   "train": {
+    "part": "train",
+    "rows": 413378,
+    "positives": 14538,
+    "prevalence": 0.03516878014795175,
+    "natural": true
+   },
+   "val": {
+    "part": "val",
+    "rows": 88581,
+    "positives": 3042,
+    "prevalence": 0.03434145019812375,
+    "natural": true
+   },
+   "holdout": {
+    "part": "holdout",
+    "rows": 88581,
+    "positives": 3083,
+    "prevalence": 0.03480430340592226,
+    "natural": true
+   }
+  }
+ },
+ "serving_contract": {
+  "dataset": "ieee",
+  "protocol": "temporal",
+  "contract_version": "1A.4",
+  "order_key": "TransactionDT",
+  "entity_key": null,
+  "row_id": "TransactionID",
+  "event_time": null,
+  "stateful": false,
+  "required_fields": [
+   "TransactionID",
+   "TransactionDT",
+   "TransactionAmt",
+   "ProductCD",
+   "card1",
+   "card2",
+   "card3",
+   "card4",
+   "card5",
+   "card6",
+   "addr1",
+   "addr2",
+   "dist1",
+   "dist2",
+   "P_emaildomain",
+   "R_emaildomain",
+   "C1",
+   "C2",
+   "C3",
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8",
+   "C9",
+   "C10",
+   "C11",
+   "C12",
+   "C13",
+   "C14",
+   "D1",
+   "D2",
+   "D3",
+   "D4",
+   "D5",
+   "D6",
+   "D7",
+   "D8",
+   "D9",
+   "D10",
+   "D11",
+   "D12",
+   "D13",
+   "D14",
+   "D15",
+   "M1",
+   "M2",
+   "M3",
+   "M4",
+   "M5",
+   "M6",
+   "M7",
+   "M8",
+   "M9",
+   "V1",
+   "V2",
+   "V3",
+   "V4",
+   "V5",
+   "V6",
+   "V7",
+   "V8",
+   "V9",
+   "V10",
+   "V11",
+   "V12",
+   "V13",
+   "V14",
+   "V15",
+   "V16",
+   "V17",
+   "V18",
+   "V19",
+   "V20",
+   "V21",
+   "V22",
+   "V23",
+   "V24",
+   "V25",
+   "V26",
+   "V27",
+   "V28",
+   "V29",
+   "V30",
+   "V31",
+   "V32",
+   "V33",
+   "V34",
+   "V35",
+   "V36",
+   "V37",
+   "V38",
+   "V39",
+   "V40",
+   "V41",
+   "V42",
+   "V43",
+   "V44",
+   "V45",
+   "V46",
+   "V47",
+   "V48",
+   "V49",
+   "V50",
+   "V51",
+   "V52",
+   "V53",
+   "V54",
+   "V55",
+   "V56",
+   "V57",
+   "V58",
+   "V59",
+   "V60",
+   "V61",
+   "V62",
+   "V63",
+   "V64",
+   "V65",
+   "V66",
+   "V67",
+   "V68",
+   "V69",
+   "V70",
+   "V71",
+   "V72",
+   "V73",
+   "V74",
+   "V75",
+   "V76",
+   "V77",
+   "V78",
+   "V79",
+   "V80",
+   "V81",
+   "V82",
+   "V83",
+   "V84",
+   "V85",
+   "V86",
+   "V87",
+   "V88",
+   "V89",
+   "V90",
+   "V91",
+   "V92",
+   "V93",
+   "V94",
+   "V95",
+   "V96",
+   "V97",
+   "V98",
+   "V99",
+   "V100",
+   "V101",
+   "V102",
+   "V103",
+   "V104",
+   "V105",
+   "V106",
+   "V107",
+   "V108",
+   "V109",
+   "V110",
+   "V111",
+   "V112",
+   "V113",
+   "V114",
+   "V115",
+   "V116",
+   "V117",
+   "V118",
+   "V119",
+   "V120",
+   "V121",
+   "V122",
+   "V123",
+   "V124",
+   "V125",
+   "V126",
+   "V127",
+   "V128",
+   "V129",
+   "V130",
+   "V131",
+   "V132",
+   "V133",
+   "V134",
+   "V135",
+   "V136",
+   "V137",
+   "V138",
+   "V139",
+   "V140",
+   "V141",
+   "V142",
+   "V143",
+   "V144",
+   "V145",
+   "V146",
+   "V147",
+   "V148",
+   "V149",
+   "V150",
+   "V151",
+   "V152",
+   "V153",
+   "V154",
+   "V155",
+   "V156",
+   "V157",
+   "V158",
+   "V159",
+   "V160",
+   "V161",
+   "V162",
+   "V163",
+   "V164",
+   "V165",
+   "V166",
+   "V167",
+   "V168",
+   "V169",
+   "V170",
+   "V171",
+   "V172",
+   "V173",
+   "V174",
+   "V175",
+   "V176",
+   "V177",
+   "V178",
+   "V179",
+   "V180",
+   "V181",
+   "V182",
+   "V183",
+   "V184",
+   "V185",
+   "V186",
+   "V187",
+   "V188",
+   "V189",
+   "V190",
+   "V191",
+   "V192",
+   "V193",
+   "V194",
+   "V195",
+   "V196",
+   "V197",
+   "V198",
+   "V199",
+   "V200",
+   "V201",
+   "V202",
+   "V203",
+   "V204",
+   "V205",
+   "V206",
+   "V207",
+   "V208",
+   "V209",
+   "V210",
+   "V211",
+   "V212",
+   "V213",
+   "V214",
+   "V215",
+   "V216",
+   "V217",
+   "V218",
+   "V219",
+   "V220",
+   "V221",
+   "V222",
+   "V223",
+   "V224",
+   "V225",
+   "V226",
+   "V227",
+   "V228",
+   "V229",
+   "V230",
+   "V231",
+   "V232",
+   "V233",
+   "V234",
+   "V235",
+   "V236",
+   "V237",
+   "V238",
+   "V239",
+   "V240",
+   "V241",
+   "V242",
+   "V243",
+   "V244",
+   "V245",
+   "V246",
+   "V247",
+   "V248",
+   "V249",
+   "V250",
+   "V251",
+   "V252",
+   "V253",
+   "V254",
+   "V255",
+   "V256",
+   "V257",
+   "V258",
+   "V259",
+   "V260",
+   "V261",
+   "V262",
+   "V263",
+   "V264",
+   "V265",
+   "V266",
+   "V267",
+   "V268",
+   "V269",
+   "V270",
+   "V271",
+   "V272",
+   "V273",
+   "V274",
+   "V275",
+   "V276",
+   "V277",
+   "V278",
+   "V279",
+   "V280",
+   "V281",
+   "V282",
+   "V283",
+   "V284",
+   "V285",
+   "V286",
+   "V287",
+   "V288",
+   "V289",
+   "V290",
+   "V291",
+   "V292",
+   "V293",
+   "V294",
+   "V295",
+   "V296",
+   "V297",
+   "V298",
+   "V299",
+   "V300",
+   "V301",
+   "V302",
+   "V303",
+   "V304",
+   "V305",
+   "V306",
+   "V307",
+   "V308",
+   "V309",
+   "V310",
+   "V311",
+   "V312",
+   "V313",
+   "V314",
+   "V315",
+   "V316",
+   "V317",
+   "V318",
+   "V319",
+   "V320",
+   "V321",
+   "V322",
+   "V323",
+   "V324",
+   "V325",
+   "V326",
+   "V327",
+   "V328",
+   "V329",
+   "V330",
+   "V331",
+   "V332",
+   "V333",
+   "V334",
+   "V335",
+   "V336",
+   "V337",
+   "V338",
+   "V339",
+   "id_01",
+   "id_02",
+   "id_03",
+   "id_04",
+   "id_05",
+   "id_06",
+   "id_07",
+   "id_08",
+   "id_09",
+   "id_10",
+   "id_11",
+   "id_12",
+   "id_13",
+   "id_14",
+   "id_15",
+   "id_16",
+   "id_17",
+   "id_18",
+   "id_19",
+   "id_20",
+   "id_21",
+   "id_22",
+   "id_23",
+   "id_24",
+   "id_25",
+   "id_26",
+   "id_27",
+   "id_28",
+   "id_29",
+   "id_30",
+   "id_31",
+   "id_32",
+   "id_33",
+   "id_34",
+   "id_35",
+   "id_36",
+   "id_37",
+   "id_38",
+   "DeviceType",
+   "DeviceInfo",
+   "has_identity"
+  ],
+  "outputs": {
+   "feature_layer": 863,
+   "tree": 863,
+   "linear": 1483
+  },
+  "state_retention_seconds": null,
+  "rules": [
+   "point_in_time: features of an event use only events observed before it; labels never enter",
+   "ordering: events of one entity must arrive in non-decreasing order-key order (global chronological order recommended); an earlier event is rejected (OutOfOrderEvent) unless strict_order is disabled",
+   "idempotency: resubmitting an entity's last processed row id is rejected (DuplicateEvent); callers must not re-score an event to obtain different features",
+   "update_after_score: the event is recorded after its features are computed, regardless of any label",
+   "warm_up: before online scoring, replay (or restore a snapshot of) at least state_retention_seconds of prior events per entity; the offline snapshot after the training part is shipped as history-state.json",
+   "cold_start: an unseen entity gets counts 0 and NaN for the other history features; unseen categories map to <UNK>, missing to <NA>; NaN is kept in the tree view and train-median-imputed in the linear view",
+   "determinism: the same event sequence yields the same features; offline batch == online stream (tested)",
+   "isolation: no fitted state is shared between datasets; every artifact carries the dataset name and the frozen-contract hash"
+  ]
+ },
+ "artifacts": {
+  "experiment.json": "5a2ccf1f67f15f9f8fb4a4aadeff184711f7bd9e43a41c2c27e9126dbc73c9b1",
+  "features.json": "f3ec4da6ad15141ba6c481cf4050b881b9a2b638f21cf355fa3e3a0fb74e15c7",
+  "manifest.json": "155f9a5ecd5a82984a76dda53e4d794edeeb0631a679708045467198872bb4fe",
+  "split.json": "040edc0e9d1f7b30581ce68efb34874068bb89d68a74d654ee7109e5d9f054ff",
+  "view-linear.json": "094601e6c702157a8ee628c4c980cb69b1f5a692aa75db81fe78d7c327427131",
+  "view-tree.json": "dcbf185975fdde6077b59bbdc550a445b6a2fb150877503afb9f0933ce7c87f0"
+ }
+}

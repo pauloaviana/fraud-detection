@@ -1,0 +1,11 @@
+{
+ "frauddet_version": "0.1.0a1",
+ "format": "frauddet.entity_state.v2",
+ "derived_from": "training part (membership.csv)",
+ "rows": 907672,
+ "entities": 959,
+ "buffered_events": 131657,
+ "files": {
+  "history-state.v2.json": "7a2d42a2f9c1619b2ae564776be16aea97f865c6ce6fb6a311aafaab847e10dd"
+ }
+}

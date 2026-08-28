@@ -1,0 +1,61 @@
+{
+ "spec": {
+  "dataset": "ieee",
+  "protocol": "temporal",
+  "order_key": "TransactionDT",
+  "target": "isFraud",
+  "part_names": [
+   "train",
+   "val",
+   "holdout"
+  ],
+  "fractions": [
+   0.7,
+   0.15,
+   0.15
+  ],
+  "gap_seconds": 0.0,
+  "seed": null,
+  "test_size": null,
+  "note": "cut at order-key values; rows at a cut belong to the earlier part; evaluation parts keep natural prevalence"
+ },
+ "boundaries": {
+  "train": 10437996.0,
+  "val": 13151840.0,
+  "holdout": Infinity
+ },
+ "summary": {
+  "train": {
+   "rows": 413378,
+   "fraction": 0.7,
+   "positives": 14538,
+   "prevalence": 0.035169,
+   "share_of_positives": 0.7036,
+   "order_min": 86400.0,
+   "order_max": 10437996.0
+  },
+  "val": {
+   "rows": 88581,
+   "fraction": 0.15,
+   "positives": 3042,
+   "prevalence": 0.034341,
+   "share_of_positives": 0.1472,
+   "order_min": 10438003.0,
+   "order_max": 13151840.0
+  },
+  "holdout": {
+   "rows": 88581,
+   "fraction": 0.15,
+   "positives": 3083,
+   "prevalence": 0.034804,
+   "share_of_positives": 0.1492,
+   "order_min": 13151880.0,
+   "order_max": 15811131.0
+  }
+ },
+ "sizes": {
+  "train": 413378,
+  "val": 88581,
+  "holdout": 88581
+ }
+}
