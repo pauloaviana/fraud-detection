@@ -1,0 +1,11 @@
+# Runtime dependencies of the scoring service — pinned to the versions the Phase 1B artifacts were
+# produced and validated with (see experiments/*/*/results.json "environment"). Update deliberately.
+numpy==2.2.2
+pandas==2.3.1
+scipy==1.15.1
+scikit-learn==1.6.1
+lightgbm==4.7.0
+xgboost==3.4.1   # ULB/temporal locked champion; LightGBM is the production family (D36/D39)
+fastapi==0.141.1
+pydantic==2.13.4
+uvicorn==0.52.4

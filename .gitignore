@@ -1,0 +1,37 @@
+# Datasets / generated ML artifacts
+data/
+artifacts/
+experiments/
+ci-demo/
+
+# Generated report data — keep human-readable .org reports
+reports/*.json
+
+# Papers / local references
+papers/
+reports/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+
+# Nix / direnv
+.direnv/
+result
+result-*
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+*~
+*.swp
+.DS_Store
+reports/

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frauddet"
+version = "0.1.0a1"
+description = "Fraud-detection service — Phase 1A data & preprocessing layer"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy",
+  "pandas>=2.0",
+  "scikit-learn",   # audit: univariate AUC leakage screen only (no models are trained)
+]
+
+[project.optional-dependencies]
+serving = ["fastapi>=0.115", "pydantic>=2.9", "uvicorn>=0.30", "lightgbm>=4.3"]
+dev = ["pytest", "ruff", "mypy", "httpx", "xgboost", "imbalanced-learn"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "W", "B006"]
+ignore = ["E731", "E702", "E741"]   # one-line statements / short names are used deliberately in numeric code

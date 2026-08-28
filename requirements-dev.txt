@@ -1,0 +1,8 @@
+# Development / CI extras (tests, lint, type checks, non-serving model libraries)
+-r requirements-serving.txt
+xgboost==3.4.1
+imbalanced-learn==0.14.2
+httpx==0.28.1
+pytest==9.1.1
+ruff==0.16.5
+mypy==2.3.1

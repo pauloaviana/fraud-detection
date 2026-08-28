@@ -1,0 +1,46 @@
+# One-command deployment of the scoring API:
+#   docker compose up --build
+# Select the bundle/model at build time (defaults: ULB / temporal) and the decision policy at run time.
+services:
+  api:
+    build:
+      context: .
+      args:
+        DATASET: ${FRAUDDET_DATASET:-ulb}
+        PROTOCOL: ${FRAUDDET_PROTOCOL:-temporal}
+        ARTIFACTS: ${FRAUDDET_ARTIFACTS_SRC:-artifacts}
+        EXPERIMENTS: ${FRAUDDET_EXPERIMENTS_SRC:-experiments}
+    image: frauddet-api:local
+    container_name: frauddet-api
+    environment:
+      FRAUDDET_POLICY: ${FRAUDDET_POLICY:-f1_max}
+      FRAUDDET_LOG_LEVEL: ${FRAUDDET_LOG_LEVEL:-INFO}
+      FRAUDDET_WORKERS: "1"          # stateful bundles (Sparkov) keep entity state in one process
+    ports:
+      - "127.0.0.1:${FRAUDDET_PORT:-8000}:8000"
+    # ---- hardening
+    user: "10001:10001"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777,noexec,nosuid,nodev
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    mem_limit: 2g
+    cpus: 2.0
+    # ---- lifecycle
+    restart: unless-stopped
+    stop_grace_period: 15s
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys,urllib.request;sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health',timeout=2).status==200 else 1)"]
+      interval: 15s
+      timeout: 3s
+      start_period: 20s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"

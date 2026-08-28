@@ -1,0 +1,32 @@
+# build context: only what the image needs (package, pinned requirements, selected artifacts)
+.git
+.gitignore
+.github
+.direnv
+.pytest_cache
+.ruff_cache
+.mypy_cache
+**/__pycache__
+**/*.pyc
+data
+papers
+reports
+tests
+contracts
+flake.nix
+flake.lock
+*.org
+README.md
+result
+# artifacts: keep bundle files and locked models, drop large / non-serving files
+artifacts/**/membership.csv
+artifacts/**/cost-context-*.csv
+artifacts/**/manifest.json
+artifacts/**/feature-manifest.json
+artifacts/**/experiment.json
+artifacts/**/imbalance-*.json
+artifacts/**/split.json
+experiments/**/checkpoint
+experiments/**/results.json
+# v1 entity-state snapshot, superseded by history-state.v2.json
+artifacts/**/history-state.json
