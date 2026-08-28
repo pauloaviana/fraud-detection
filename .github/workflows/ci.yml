@@ -35,7 +35,7 @@ jobs:
             requirements-dev.txt
       - name: Install pinned dependencies
         run: |
-          pip install --no-cache-dir -r requirements-dev.txt
+          pip install -r requirements-dev.txt
       - name: Lint (ruff)
         run: ruff check src tests
       - name: Type check (mypy, advisory)
@@ -65,7 +65,7 @@ jobs:
         env:
           PYTHONPATH: src
         run: |
-          pip install --no-cache-dir -r requirements-serving.txt
+          pip install -r requirements-serving.txt
           python -m frauddet.demo_artifacts --out ci-demo --rows 3000
       - name: Build image
         run: |
